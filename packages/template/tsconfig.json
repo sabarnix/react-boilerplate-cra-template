@@ -18,14 +18,17 @@
     "jsx": "react-jsx",
     "baseUrl": "./src"
   },
-  "include": ["src", "internals/startingTemplate/**/*"],
+  "include": ["."],
   "ts-node": {
     "compilerOptions": {
       "esModuleInterop": true,
       "module": "commonjs",
       "moduleResolution": "node",
       "noEmit": true,
-      "allowSyntheticDefaultImports": true
+      "allowSyntheticDefaultImports": true,
+      "allowJs": true,
+    "skipLibCheck": true,
+
     }
   }
 }
