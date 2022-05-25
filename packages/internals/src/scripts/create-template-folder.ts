@@ -10,6 +10,7 @@ export function crateTemplateFolder(opts: Options = {}) {
 
   const copyToTemplate = (
     path: string,
+    fromRoot: boolean = false,
     isRecursive?: boolean,
     modifyContent?: {
       from: RegExp;
@@ -18,9 +19,9 @@ export function crateTemplateFolder(opts: Options = {}) {
   ) => {
     const p = `template/${path}`;
     if (isRecursive) {
-      shell.cp('-r', path, p);
+      shell.cp('-r', `${fromRoot ? '../../' : ''}${path}`, p);
     } else {
-      shell.cp(path, p);
+      shell.cp( `${fromRoot ? '../../' : ''}${path}`, p);
     }
     if (modifyContent) {
       try {
@@ -42,40 +43,27 @@ export function crateTemplateFolder(opts: Options = {}) {
 
   // We want only pre-commit hook with custom script excluded
   shell.mkdir('template/.husky');
-  copyToTemplate('.husky/pre-commit', false, {
+  copyToTemplate('.husky/pre-commit', true, false, {
     from: /yarn verify-startingTemplate-changes/g,
     to: '',
   });
 
-  shell.mkdir('template/internals');
-  copyToTemplate('internals/generators', true);
 
-  shell.mkdir('template/internals/extractMessages');
-  copyToTemplate('internals/extractMessages/i18next-scanner.config.js');
-  copyToTemplate('internals/extractMessages/stringfyTranslations.js');
-
-  shell.mkdir('template/internals/scripts');
-  copyToTemplate('internals/scripts/clean.ts');
-
-  copyToTemplate('internals/startingTemplate', true);
-  copyToTemplate('internals/testing', true);
-
-  copyToTemplate('.vscode', true);
-  copyToTemplate('public', true);
-  copyToTemplate('src', true);
+  copyToTemplate('.vscode', true, true);
+  copyToTemplate('public', false, true);
+  copyToTemplate('src', false, true);
   copyToTemplate('.babel-plugin-macrosrc.js');
   copyToTemplate('.env.local');
   copyToTemplate('.env.production');
   copyToTemplate('.eslintrc.js');
-  copyToTemplate('.gitattributes');
-  copyToTemplate('.gitignore');
-  copyToTemplate('.npmrc');
-  copyToTemplate('.nvmrc');
+  copyToTemplate('.gitattributes', true);
+  copyToTemplate('.gitignore', true);
+  copyToTemplate('.npmrc', true);
+  copyToTemplate('.nvmrc', true);
   copyToTemplate('.prettierignore');
-  copyToTemplate('.prettierrc');
-  copyToTemplate('.stylelintrc');
+  copyToTemplate('.stylelintrc.js');
   copyToTemplate('tsconfig.json');
-  copyToTemplate('README.md');
+  copyToTemplate('README.md', true);
 
   // Rename some specific files so they won't be discarded in 'yarn pack'
   shell.mv('template/.gitignore', 'template/gitignore');

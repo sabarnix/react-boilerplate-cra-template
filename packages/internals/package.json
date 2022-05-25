@@ -1,0 +1,25 @@
+{
+  "name": "@rb/internals",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "exports": {
+    ".": "./src/*"
+  },
+  "main": "index.js",
+  "bin": {
+    "rb-scripts": "./src/bin/rb-scripts.js",
+    "rb-generate": "plop --plopfile @rb/internals/generators/plopfile.ts"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "node-plop": "0.26.2",
+    "plop": "2.7.4",
+    "react-dev-utils": "^12.0.1",
+    "ts-node": "10.4.0",
+    "typescript": "4.5.4"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@rb/dotfiles",
+  "version": "1.0.0",
+  "description": "this package contains all the dot files",
+  "main": "index.js",
+  "exports": {
+    ".": "./*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "13.1.0",
+    "@commitlint/config-conventional": "13.1.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "stylelint": "14.2.0",
+    "stylelint-config-recommended": "6.0.0",
+    "stylelint-config-styled-components": "0.1.1",
+    "stylelint-processor-styled-components": "1.10.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
